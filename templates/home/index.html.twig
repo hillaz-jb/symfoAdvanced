@@ -3,11 +3,29 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-<div>
-    {% if app.user %}
-        <p>Je suis connecté</p>
-    {% else %}
-        <p>Jene suis pas connecté</p>
-    {% endif %}
-</div>
+    <div>
+        <div>
+            {% if app.user %}
+                <p>Je suis connecté</p>
+            {% else %}
+                <p>Je ne suis pas connecté</p>
+            {% endif %}
+        </div>
+        <div>
+            {{ form_start(form) }}
+            {{ form_row(form.email) }}
+            <button type="submit">Search</button>
+            {{ form_end(form) }}
+
+        </div>
+        <div>
+            {# PAGINATION #}
+            {% for user in pagination %}
+                <p>{{ user.email }}</p>
+            {% endfor %}
+            <div class="pagination">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
 {% endblock %}
